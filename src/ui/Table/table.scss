@@ -1,0 +1,60 @@
+.table {
+  width: 100%;
+  border: .2rem solid rgba(0,0,0,.075);
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  border-radius: .2rem;
+  display: table;
+}
+
+.table-header-cell {
+  display: table-cell;
+  color: rgba(0,0,0,.75);
+  border-bottom: .1rem dashed rgba(0,0,0,.075);
+}
+
+.table-header-cell, .table-cell {
+  border-right: .1rem dashed rgba(0,0,0,.075);
+  padding: 0 1rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.table-cell {
+  display: table-cell;
+}
+
+.table-row, .table-header-row {
+  display: table-row;
+}
+
+.table-cell:last-of-type, .table-header-cell:last-of-type {
+  border-right: 0;
+}
+
+.table-row:nth-child(odd), .table-header-row {
+  background: rgba(0,0,0,.035);
+}
+
+.table-header-cell:last-of-type, .table-cell:last-of-type {
+  text-align: center;
+}
+
+.table-row.active:hover {
+  background: opacify($secondary, 0.1);
+}
+
+.not-active {
+  pointer-events: none;
+}
+
+.table-header-cell a {
+  float: right;
+  height: 100%;
+  display: block;
+  padding: 0 .5rem;
+}
+
+.table-header-cell i:hover {
+  opacity: .75;
+}

@@ -1,0 +1,16 @@
+header {
+  background: $primary;
+  height: 3.3rem;
+  line-height: 3.3rem;
+  width: 100%;
+  font-size: 1.1rem;
+}
+
+header .active {
+  color: $support;
+}
+
+header a {
+  padding-right: 3rem;
+  color: white;
+}

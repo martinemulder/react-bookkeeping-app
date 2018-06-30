@@ -1,0 +1,31 @@
+// Colors
+$primary: #33B0A4;
+$secondary: rgba(255, 230, 16, 1);
+$support: #1de9b6;
+$light: rgba(236,236,236,1);
+$disabled: $light;
+
+// Button colors
+$primary-button-border: rgba(255, 230, 16, 1);
+$primary-button: darken($primary-button-border, 50%);
+
+$secondary-button-border: #1de9b6;
+$secondary-button: darken($secondary-button-border, 50%);
+
+$remove-button-border: #ff4d46;
+$remove-button: #ff4d46;
+
+// Font size
+$xl-font-size: 4.8rem;
+$l-font-size: 3.2rem;
+$m-font-size: 1.8rem;
+
+// Padding
+$xl-padding: 4rem;
+$l-padding: 3rem;
+$m-padding: 2rem;
+$s-padding: 1rem;
+
+// Break points
+$mobile-breakpoint: 768px;
+

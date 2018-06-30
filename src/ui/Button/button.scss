@@ -1,0 +1,46 @@
+button {
+  padding: .5rem 2rem;
+  border: 3px solid white;
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  border-radius: .2rem;
+  margin-bottom: 1.3rem;
+}
+
+button.primary {
+  background: white;
+  border-color: $primary-button-border;
+  color: darken($primary-button-border, 6%);
+}
+
+button.secondary {
+  background: white;
+  border-color: $secondary-button-border;
+  color: darken($secondary-button-border, 6%);
+}
+
+button.remove {
+  background: white;
+  border-color: $remove-button-border;
+  color: darken($remove-button-border, 6%);
+}
+
+button.add-button {
+  position: absolute;
+  padding: .5rem 3.3rem;
+  top: 3rem;
+  right: 2rem;
+}
+
+button:hover {
+  opacity: 0.75;
+}
+
+button:disabled {
+  border-color: $disabled;
+  color: darken($disabled, 6%);
+}
+
+button:disabled:hover {
+  opacity: 1;
+}
