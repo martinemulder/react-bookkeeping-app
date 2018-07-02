@@ -30,7 +30,6 @@ export class ClientForm extends React.Component {
     if (!this.state.name) {
       this.setState(() => ({ error: 'Please provide a name' }));
     } else {
-      console.log(this.state.name);
       this.setState(() => ({ error: '' }));
       this.props.onSubmit({
         name: this.state.name,

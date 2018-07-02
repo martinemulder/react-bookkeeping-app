@@ -13,6 +13,16 @@ export const selectClients = (clients, { sortBy = '' }) => {
   });
 };
 
+export const selectActiveClients = (clients) => {
+  const clientList = [];
+  clients.map((client) => {
+    if (client.active) {
+      clientList.push(client)
+    }
+  });
+  return clientList;
+};
+
 export const selectClientById = (id, clients) => {
   return clients.find((client) => client.id === id);
 };

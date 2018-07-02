@@ -8,8 +8,9 @@ export const setHourEntries = (hourEntries) => ({
 });
 
 export const startSetHourEntries = () => {
-  return (dispatch) => {
-    return database.ref('hourEntries').once('value').then((snapshot) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/hourEntries`).once('value').then((snapshot) => {
       const hourEntries = [];
 
       snapshot.forEach((childSnapshot) => {
@@ -30,18 +31,21 @@ export const addHourEntry = (hourEntry) => ({
 });
 
 export const startAddHourEntry = (hourEntryData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
-      project = undefined,
       client = undefined,
+      project = undefined,
       date = '',
       startTime = '',
       endTime = '',
+      totalTime = '',
+      description = '',
       invoiced = false
     } = hourEntryData;
-    const hourEntry = { project, client, date, startTime, endTime, invoiced };
-    console.log(hourEntry);
-    return database.ref('hourEntries').push(hourEntry).then((ref) => {
+    const hourEntry = { project, client, date, startTime, endTime, totalTime, description, invoiced };
+
+    return database.ref(`users/${uid}/hourEntries`).push(hourEntry).then((ref) => {
       dispatch(addHourEntry({
         id: ref.key,
         ...hourEntry
@@ -58,8 +62,9 @@ export const removeHourEntry = ({ id } = {}) => ({
 });
 
 export const startRemoveHourEntry = ({ id } = {}) => {
-  return (dispatch) => {
-    return database.ref('hourEntries').child(id).remove().then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/hourEntries`).child(id).remove().then(() => {
       dispatch(removeHourEntry({ id }));
     });
   };
@@ -73,8 +78,9 @@ export const editHourEntry = (id, updates) => ({
 });
 
 export const startEditHourEntry = (id, updates) => {
-  return (dispatch) => {
-    return database.ref('hourEntries').child(id).update(updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/hourEntries`).child(id).update(updates).then(() => {
       dispatch(editHourEntry(id, updates));
     });
   };

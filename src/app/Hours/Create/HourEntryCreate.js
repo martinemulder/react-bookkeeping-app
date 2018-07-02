@@ -4,31 +4,44 @@ import { startAddHourEntry } from '../actions/hourEntries';
 import HoursForm from '../Form/HourEntryForm';
 import AppFrame from '../../../ui/AppFrame/AppFrame';
 import { toHoursDashboard } from '../../../routes/links';
+import { selectProjectsFromClient } from '../../Projects/selectors/projects';
+import {setSelectedClient} from "../../Projects/actions/filters";
 
 export class HoursCreate extends React.Component {
+
+  state = {
+    client: ''
+  };
 
   constructor(props) {
     super(props);
   }
 
   onSubmit = (hourEntry) => {
-    console.log(hourEntry);
     this.props.dispatch(startAddHourEntry(hourEntry));
     this.props.history.push(
       toHoursDashboard()
     )
   };
 
+  onSelectClient = (client) => {
+    this.props.dispatch(setSelectedClient(client))
+  };
+
   render() {
     const { projectList, clientList } = this.props;
     return (
-      <AppFrame>
-        <h1>Create hours</h1>
+      <AppFrame
+        title="Create hour entry"
+        parent={toHoursDashboard()}
+        parentText="back to hour entries"
+      >
         <HoursForm
           onSubmit={this.onSubmit}
           submitButtonLabel="Create hours"
           projectList={projectList}
           clientList={clientList}
+          onSelectClient={client => this.onSelectClient(client)}
         />
       </AppFrame>
     )
@@ -38,7 +51,7 @@ export class HoursCreate extends React.Component {
 
 const mapStateToProps = ((state) => {
   return {
-    projectList: state.projects,
+    projectList: selectProjectsFromClient(state.projects, state.projectFilters),
     clientList: state.clients
   }
 });

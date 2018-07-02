@@ -7,8 +7,9 @@ export const setProjects = (projects) => ({
 });
 
 export const startSetProjects = () => {
-  return (dispatch) => {
-    return database.ref('projects').once('value').then((snapshot) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/projects`).once('value').then((snapshot) => {
       const projects = [];
 
       snapshot.forEach((childSnapshot) => {
@@ -29,15 +30,17 @@ export const addProject = (project) => ({
 });
 
 export const startAddProject = (projectData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
+      client = undefined,
       title = '',
       price = '',
       finished = false
     } = projectData;
-    const project = { title, price, finished };
+    const project = { client, title, price, finished };
 
-    return database.ref('projects').push(project).then((ref) => {
+    return database.ref(`users/${uid}/projects`).push(project).then((ref) => {
       dispatch(addProject({
         id: ref.key,
         ...project
@@ -54,8 +57,9 @@ export const removeProject = ({ id } = {}) => ({
 });
 
 export const startRemoveProject = ({ id } = {}) => {
-  return (dispatch) => {
-    return database.ref('projects').child(id).remove().then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/projects`).child(id).remove().then(() => {
       dispatch(removeProject({ id }));
     });
   };
@@ -69,8 +73,9 @@ export const editProject = (id, updates) => ({
 });
 
 export const startEditProject = (id, updates) => {
-  return (dispatch) => {
-    return database.ref('projects').child(id).update(updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/projects`).child(id).update(updates).then(() => {
       dispatch(editProject(id, updates));
     });
   };

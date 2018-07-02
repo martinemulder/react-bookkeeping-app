@@ -1,5 +1,5 @@
 import React from 'react';
-import { toClientEdit, toHourEntryEdit, toProjectEdit } from '../../../routes/links';
+import { toHourEntryEdit } from '../../../routes/links';
 import TableRow from '../../../ui/Table/TableRow';
 import TableCell from '../../../ui/Table/TableCell';
 
@@ -10,17 +10,27 @@ const HoursListItem = ({hourEntry, project, client}) => (
     <TableCell>
       {hourEntry.date}
     </TableCell>
-    <TableCell
-      link={toClientEdit(client.id)}
-    >
+    <TableCell>
       {client.name}
     </TableCell>
-    <TableCell
-      link={toProjectEdit(project.id)}
-    >
+    <TableCell>
       {project.title}
     </TableCell>
-    <TableCell>{hourEntry.invoiced && <i className="fas fa-check"></i>}</TableCell>
+    <TableCell>
+      {hourEntry.description}
+    </TableCell>
+    <TableCell>
+      {hourEntry.startTime}
+    </TableCell>
+    <TableCell>
+      {hourEntry.endTime}
+    </TableCell>
+    <TableCell>
+      {hourEntry.totalTime}
+    </TableCell>
+    <TableCell>
+      {hourEntry.invoiced && <i className="fas fa-check"></i>}
+    </TableCell>
   </TableRow>
 );
 

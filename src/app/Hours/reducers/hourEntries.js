@@ -17,7 +17,6 @@ const hoursReducer = (state = hoursReducerDefaultState, action) => {
             ...action.updates
           }
         } else {
-          console.log(hourEntry);
           return hourEntry;
         }
       });

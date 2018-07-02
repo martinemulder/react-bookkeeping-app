@@ -1,10 +1,16 @@
 
 const filtersReducerDefaultState = [{
-  sortBy: 'title'
+  sortBy: 'title_asc',
+  selectedClient: ''
 }];
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
+    case 'SET_SELECTED_CLIENT':
+      return {
+        ...state,
+        selectedClient: action.selectedClient
+      };
     case 'SORT_BY_TITLE':
       if (state.sortBy === 'title_asc') {
         return {

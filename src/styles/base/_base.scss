@@ -160,14 +160,13 @@ i {
 
 .page-wrap {
   display: flex;
-  padding-left: 5%;
-  padding-right: 0;
+  padding: 0 0 0 5%;
   position: relative;
 }
 
 .content {
   width: 80vw;
-  padding-right: 2rem;
+  padding: 0 2rem 6rem 0;
   position: relative;
 }
 
@@ -181,27 +180,106 @@ a {
 
 // Forms
 
+form {
+  width: 75%;
+  max-width: 80%;
+}
+
 .form-group {
   width: 100%;
+}
+
+.form-group {
   margin-bottom: 1.3rem;
 }
 
-input {
-  width: 30%;
+.form-group-last {
+  margin-right: 0!important;
+}
+
+input, textarea {
   padding: .5rem;
-  border: .2rem solid $light;
-  -webkit-border-radius: .2rem;
-  -moz-border-radius: .2rem;
-  border-radius: .2rem;
+}
+
+form textarea, form select {
+  width: 80%;
+}
+
+.form-group-half {
   margin-right: 1.3rem;
 }
 
-input[type="number"] {
-  width: 15%;
+input, .SingleDatePickerInput, .DateRangePickerInput, select, textarea {
+  border: .2rem solid $light!important;
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  border-radius: .2rem;
+}
+
+#hour-filter {
+  margin-bottom: 2.3rem;
+}
+
+#hour-filter-fields {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  float: left;
+}
+
+#hour-filter label {
+  margin-right: .1rem;
+}
+
+#hour-filter button {
+  margin-bottom: 0;
+}
+
+#hour-filter select {
+  max-width: 10rem;
+}
+
+#hour-filter, #hour-filter select {
+  color: #757575;
+}
+
+#hour-filter .DateRangePicker, #hour-filter select {
+  margin-right: 1.2rem;
+}
+
+.DateInput {
+  font-size: 1rem!important;
+  padding: 0!important;
+}
+
+select {
+  padding: .5rem;
+}
+
+.SingleDatePickerInput .DateInput {
+  padding: .25rem!important;
+  font-size: 1rem!important;
+}
+
+input[type="time"], .SingleDatePickerInput .DateInput {
+  text-align: center;
+  width: 10rem;
+}
+
+label, .form-group, .form-group-half {
+  display: flex;
+  align-items: center;
+}
+
+label {
+  width: 4.5rem;
+}
+
+label i {
+  margin-right: .5rem;
 }
 
 input[type="checkbox"] {
-  margin-left: 1rem;
   width: 20px;
   height: 20px;
   background: white;
@@ -212,4 +290,47 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:hover, input[type="checkbox"]:checked {
   background: $support;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+button[type="submit"] {
+  margin-top: 1rem;
+}
+
+#hour-entry-form .form-group:nth-child(1) {
+  margin-bottom: .6rem;
+}
+
+.form-group:nth-child(2) .column-half {
+  margin-left: 5.5rem;
+}
+
+// Columns
+
+.column {
+  display: flex;
+}
+
+.column-half {
+  width: 50%;
+  float: left;
+  margin-right: 1.3rem;
+}
+
+.column-half.last-column {
+  margin-right: 0!important;
+}
+
+// Clearfix
+
+.form-group:after, #hour-filter:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
 }

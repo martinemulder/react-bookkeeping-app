@@ -3,6 +3,7 @@ import AppFrame from '../../../ui/AppFrame/AppFrame';
 import Button from '../../../ui/Button/Button';
 import HourEntryList from '../List/HourEntryList';
 import { toHourEntryCreate } from '../../../routes/links';
+import HourFilter from '../Filter/HourFilter';
 
 export class HourEntryDashboard extends React.Component {
 
@@ -24,6 +25,7 @@ export class HourEntryDashboard extends React.Component {
             this.createHours()
           }}
         />
+        <HourFilter />
         <HourEntryList />
       </AppFrame>
     )

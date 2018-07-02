@@ -6,6 +6,7 @@ import TableHeaderCell from '../../../ui/Table/TableHeaderCell';
 import ProjectListItem from './ProjectListItem';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { sortByFinished, sortByPrice, sortByTitle } from '../actions/filters';
+import {selectClientById} from "../../Clients/selectors/clients";
 
 export class ProjectList extends React.Component {
 
@@ -14,11 +15,13 @@ export class ProjectList extends React.Component {
   }
 
   render() {
-    const { projects, dispatch } = this.props;
-    console.log(projects);
+    const { projects, dispatch, clients } = this.props;
     return (
       <Table>
         <TableHeaderRow>
+          <TableHeaderCell>
+            client
+          </TableHeaderCell>
           <TableHeaderCell
             action={() => {
               dispatch(sortByTitle());
@@ -42,7 +45,8 @@ export class ProjectList extends React.Component {
           </TableHeaderCell>
         </TableHeaderRow>
         {projects.map((project) => {
-          return <ProjectListItem key={project.id} {...project} />
+          const client = selectClientById(project.client, clients);
+          return <ProjectListItem key={project.id} project={project} client={client} />
         })}
       </Table>
     )
@@ -53,7 +57,8 @@ export class ProjectList extends React.Component {
 const mapStateToProps = ((state) => {
   return {
     projects: selectProjects(state.projects, state.projectFilters),
-    projectFilters: state.projectFilters
+    projectFilters: state.projectFilters,
+    clients: state.clients
   }
 });
 

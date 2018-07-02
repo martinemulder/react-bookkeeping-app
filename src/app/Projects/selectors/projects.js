@@ -1,6 +1,5 @@
 
 export const selectProjects = (projects, { sortBy = '' }) => {
-  console.log('selecting projects');
   return projects.sort((a,b) => {
     if (sortBy === 'title_asc') {
       return b.title < a.title ? 1 : -1;
@@ -16,6 +15,28 @@ export const selectProjects = (projects, { sortBy = '' }) => {
       return a.finished < b.finished ? 1 : -1;
     }
   });
+};
+
+export const selectProjectsFromClient = (projects, { selectedClient = ''}) => {
+  const clientProjects = [];
+
+  projects.map((project) => {
+    if (project.client === selectedClient) {
+      clientProjects.push(project)
+    }
+  });
+
+  return clientProjects
+};
+
+export const selectActiveProjects = (projects) => {
+  const projectList = [];
+  projects.map((project) => {
+    if (!project.finished) {
+      projectList.push(project)
+    }
+  });
+  return projectList;
 };
 
 export const selectProjectById = (id, projects) => {

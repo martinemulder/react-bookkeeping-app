@@ -4,23 +4,29 @@ import { startAddProject } from '../actions/projects';
 import ProjectForm from '../Form/ProjectForm';
 import AppFrame from '../../../ui/AppFrame/AppFrame';
 import { toProjectDashboard } from '../../../routes/links';
+import { selectActiveClients } from '../../Clients/selectors/clients';
 
 export class ProjectCreate extends React.Component {
 
   onSubmit = (project) => {
-    this.props.startAddProject(project);
+    this.props.dispatch(startAddProject(project));
     this.props.history.push(
       toProjectDashboard()
     )
   };
 
   render() {
+    const { clientList } = this.props;
     return (
-      <AppFrame>
-        <h1>Create project</h1>
+      <AppFrame
+        title="Create project"
+        parent={toProjectDashboard()}
+        parentText="back to projects"
+      >
         <ProjectForm
           onSubmit={this.onSubmit}
           submitButtonLabel="Create project"
+          clientList={clientList}
         />
       </AppFrame>
     )
@@ -28,8 +34,10 @@ export class ProjectCreate extends React.Component {
 
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  startAddProject: (project) => dispatch(startAddProject(project))
+const mapStateToProps = ((state) => {
+  return {
+    clientList: state.clients
+  }
 });
 
-export default connect(undefined, mapDispatchToProps)(ProjectCreate);
+export default connect(mapStateToProps)(ProjectCreate);

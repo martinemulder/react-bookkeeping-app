@@ -7,6 +7,18 @@ button {
   margin-bottom: 1.3rem;
 }
 
+button.link-button {
+  background: transparent;
+  color: $primary;
+  margin-bottom: 0;
+  padding: .5rem 1rem;
+}
+
+button.filter-button {
+  float: right;
+  margin-left: 1.2rem;
+}
+
 button.primary {
   background: white;
   border-color: $primary-button-border;
@@ -23,6 +35,10 @@ button.remove {
   background: white;
   border-color: $remove-button-border;
   color: darken($remove-button-border, 6%);
+}
+
+button.duplicate-button {
+  margin-right: 1.2rem;
 }
 
 button.add-button {
@@ -43,4 +59,14 @@ button:disabled {
 
 button:disabled:hover {
   opacity: 1;
+}
+
+button.logout-button {
+  float: right;
+  margin: 0;
+  color: white;
+  background: transparent;
+  border: none;
+  line-height: 3rem;
+  padding: 0;
 }

@@ -17,8 +17,11 @@ export class ClientCreate extends React.Component {
 
   render() {
     return (
-      <AppFrame>
-        <h1>Create client</h1>
+      <AppFrame
+        title="Create client"
+        parent={toClientDashboard()}
+        parentText="back to clients"
+      >
         <ClientForm
           onSubmit={this.onSubmit}
           submitButtonLabel="Create client"

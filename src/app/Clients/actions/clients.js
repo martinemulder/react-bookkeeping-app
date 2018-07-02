@@ -7,8 +7,9 @@ export const setClients = (clients) => ({
 });
 
 export const startSetClients = () => {
-  return (dispatch) => {
-    return database.ref('clients').once('value').then((snapshot) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/clients`).once('value').then((snapshot) => {
       const clients = [];
 
       snapshot.forEach((childSnapshot) => {
@@ -29,14 +30,15 @@ export const addClient = (client) => ({
 });
 
 export const startAddClient = (clientData = {}) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
     const {
       name = '',
       active = true
     } = clientData;
     const client = { name, active };
 
-    return database.ref('clients').push(client).then((ref) => {
+    return database.ref(`users/${uid}/clients`).push(client).then((ref) => {
       dispatch(addClient({
         id: ref.key,
         ...client
@@ -53,8 +55,9 @@ export const removeClient = ({ id } = {}) => ({
 });
 
 export const startRemoveClient = ({ id } = {}) => {
-  return (dispatch) => {
-    return database.ref('clients').child(id).remove().then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/clients`).child(id).remove().then(() => {
       dispatch(removeClient({ id }));
     });
   };
@@ -68,8 +71,9 @@ export const editClient = (id, updates) => ({
 });
 
 export const startEditClient = (id, updates) => {
-  return (dispatch) => {
-    return database.ref('clients').child(id).update(updates).then(() => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/clients`).child(id).update(updates).then(() => {
       dispatch(editClient(id, updates));
 
     });

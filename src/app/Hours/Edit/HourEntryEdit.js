@@ -1,12 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startEditHourEntry, startRemoveHourEntry } from '../actions/hourEntries';
+import {startAddHourEntry, startEditHourEntry, startRemoveHourEntry} from '../actions/hourEntries';
 import HourEntryForm from '../Form/HourEntryForm';
 import AppFrame from '../../../ui/AppFrame/AppFrame';
 import { toHoursDashboard } from '../../../routes/links';
 import Button from '../../../ui/Button/Button';
+import { selectProjectsFromClient } from '../../Projects/selectors/projects';
+import { setSelectedClient } from '../../Projects/actions/filters';
 
 export class HoursEdit extends React.Component {
+
+  constructor(props) {
+    super(props);
+    const hourEntry = this.props.hourEntry;
+    this.props.dispatch(setSelectedClient(hourEntry.client))
+  }
+
+  state = {
+    client: ''
+  };
 
   onSubmit = (hourEntry) => {
     this.props.dispatch(startEditHourEntry(this.props.hourEntry.id, hourEntry));
@@ -15,12 +27,17 @@ export class HoursEdit extends React.Component {
     )
   };
 
+  onSelectClient = (client) => {
+    this.props.dispatch(setSelectedClient(client))
+  };
+
   render() {
-    const { hourEntry, dispatch, history, projectList, project, clientList, client } = this.props;
+    const { hourEntry, dispatch, history, projectList, clientList } = this.props;
     return (
       <AppFrame
-        title="Edit Hour Entry"
+        title="Edit hour entry"
         parent={toHoursDashboard()}
+        parentText="back to hour entries"
       >
         <HourEntryForm
           submitButtonLabel="Save changes"
@@ -28,9 +45,19 @@ export class HoursEdit extends React.Component {
           hourEntry={hourEntry}
           projectList={projectList}
           clientList={clientList}
+          onSelectClient={client => this.onSelectClient(client)}
         />
         <Button
-          text="Remove this hour entry"
+          text="Duplicate"
+          name="duplicate"
+          color="secondary"
+          action={() => {
+            dispatch(startAddHourEntry(hourEntry));
+            history.push(toHoursDashboard());
+          }}
+        />
+        <Button
+          text="Remove"
           name="remove"
           color="remove"
           action={() => {
@@ -47,7 +74,7 @@ export class HoursEdit extends React.Component {
 const mapStateToProps = (state, props) => {
   return {
     hourEntry: state.hourEntries.find((hourEntry) => hourEntry.id === props.match.params.id),
-    projectList: state.projects,
+    projectList: selectProjectsFromClient(state.projects, state.projectFilters),
     clientList: state.clients
   }
 };

@@ -1,3 +1,9 @@
+// Login
+
+export function toLogin() {
+  return '/';
+}
+
 // Clients
 
 export function toClientCreate() {
@@ -29,7 +35,7 @@ export function toProjectEdit(id) {
 // Hours
 
 export function toHoursDashboard() {
-  return '/';
+  return '/hours';
 }
 
 export function toHourEntryCreate() {

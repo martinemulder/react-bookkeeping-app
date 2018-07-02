@@ -1,9 +1,10 @@
-// import 'react-dates/initialize';
 import React from 'react';
 import Button from '../../../ui/Button/Button';
 import {SingleDatePicker} from "react-dates";
 import moment from 'moment';
-import { TimePicker } from 'react-time-picker';
+import { selectTotalTime } from '../selectors/hourEntries';
+import { toClientCreate, toProjectCreate } from '../../../routes/links';
+import { Link } from 'react-router-dom';
 
 export class HoursForm extends React.Component {
 
@@ -14,7 +15,10 @@ export class HoursForm extends React.Component {
       client: props.hourEntry ? props.hourEntry.client : '',
       project: props.hourEntry ? props.hourEntry.project : '',
       date: props.hourEntry ? moment(props.hourEntry.date, 'DD-MM-YYYY') : moment(),
-      // time: props.hourEntry ? moment(props.hourEntry.time, 'h:i') : moment(),
+      startTime: props.hourEntry ? props.hourEntry.startTime : '',
+      endTime: props.hourEntry ? props.hourEntry.endTime : '',
+      totalTime: props.hourEntry ? props.hourEntry.totalTime : '',
+      description: props.hourEntry ? props.hourEntry.description : '',
       invoiced: props.hourEntry ? props.hourEntry.invoiced: false,
       submitting: false,
       focused: false,
@@ -30,14 +34,39 @@ export class HoursForm extends React.Component {
   onClientChange = (e) => {
     const client = e.target.value;
     this.setState(() => ({ client }));
+    this.props.onSelectClient(client);
   };
 
   onDateChange = (date) => {
     this.setState(() => ({ date }));
   };
 
-  onTimeChange = (time) => {
-    this.setState(() => ({ time }));
+  onStartTimeChange = (e) => {
+    const startTime = e.target.value;
+    this.setState(() => ({ startTime }));
+  };
+
+  setTotalTime = () => {
+    const { startTime, endTime } = this.state;
+    if (startTime && endTime) {
+      const total = selectTotalTime(startTime, endTime);
+      this.setState(() => ({ totalTime: total }));
+    }
+  };
+
+  onEndTimeChange = (e) => {
+    const endTime = e.target.value;
+    this.setState(() => ({ endTime }));
+  };
+
+  onTotalTimeChange = (e) => {
+    const totalTime = e.target.value;
+    this.setState(() => ({ totalTime }));
+  };
+
+  onDescriptionChange = (e) => {
+    const description = e.target.value;
+    this.setState(() => ({ description }));
   };
 
   onInvoicedChange = () => {
@@ -48,14 +77,27 @@ export class HoursForm extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    if (!this.state.client) {
+    if (!this.state.client || !this.state.date) {
       this.setState(() => ({error: 'Please provide a client and a date'}));
     } else {
       this.setState(() => ({ error: '' }));
+
+      let totalTime;
+
+      if (this.state.startTime && this.state.endTime) {
+        totalTime = selectTotalTime(this.state.startTime, this.state.endTime);
+      } else if (this.state.totalTime) {
+        totalTime = this.state.totalTime;
+      }
+
       this.props.onSubmit({
         project: this.state.project,
         client: this.state.client,
         date: this.state.date.format('DD-MM-YYYY'),
+        startTime: this.state.startTime,
+        endTime: this.state.endTime,
+        totalTime: totalTime,
+        description: this.state.description,
         invoiced: this.state.invoiced,
       });
     }
@@ -63,46 +105,130 @@ export class HoursForm extends React.Component {
 
   render() {
     const { submitButtonLabel, projectList, clientList } = this.props;
+    const { error, focused, client, project, date, startTime, endTime, totalTime, description, invoiced } = this.state;
     return (
       <div>
-        {this.state.error && <p>{this.state.error}</p>}
-          <form onSubmit={this.onSubmit}>
+        {error && <p>{error}</p>}
+          <form onSubmit={this.onSubmit} id="hour-entry-form">
             <div className="form-group">
-              <select
-                name="project"
-                value={this.state.project}
-                onChange={this.onProjectChange}
-              >
-                <option value="">Choose a project</option>
-                {projectList.map((project) => {
-                  return <option key={project.id} value={project.id}>{project.title}</option>
-                })}
-              </select>
+              <div className="column column-half">
+                <label htmlFor="client">
+                  <i className="far fa-user"></i> Client
+                </label>
+                <select
+                  name="client"
+                  value={client}
+                  onChange={this.onClientChange}
+                >
+                  <option value="">Choose a client</option>
+                  {clientList.map((client) => {
+                    return <option key={client.id} value={client.id}>{client.name}</option>
+                  })}
+                </select>
+              </div>
+              <div className="column column-half last-column">
+                <label htmlFor="client">
+                  <i className="fas fa-wrench"></i> Project
+                </label>
+                <select
+                  name="project"
+                  value={project}
+                  onChange={this.onProjectChange}
+                >
+                  <option value="">Choose a project</option>
+                  {projectList.map((project) => {
+                    return <option key={project.id} value={project.id}>{project.title}</option>
+                  })}
+                </select>
+              </div>
             </div>
             <div className="form-group">
-              <select
-                name="client"
-                value={this.state.client}
-                onChange={this.onClientChange}
-              >
-                <option value="">Choose a client</option>
-                {clientList.map((client) => {
-                  return <option key={client.id} value={client.id}>{client.name}</option>
-                })}
-              </select>
+              <div className="column column-half">
+                <Link
+                  to={toClientCreate()}
+                >
+                  add new client
+                </Link>
+              </div>
+              <div className="column column-half last-column">
+                <Link
+                  to={toProjectCreate()}
+                >
+                  add new project
+                </Link>
+              </div>
             </div>
             <div className="form-group">
+              <label htmlFor="date">
+                <i className="fas fa-calendar-alt"></i> Date
+              </label>
               <SingleDatePicker
-                date={this.state.date}
+                date={date}
                 onDateChange={date => this.onDateChange(date)}
-                focused={this.state.focused}
+                focused={focused}
                 onFocusChange={({ focused }) => this.setState({ focused })}
                 displayFormat="DD-MM-YYYY"
                 firstDayOfWeek={1}
+                isOutsideRange={() => false}
               />
             </div>
             <div className="form-group">
-              <TimePicker />
+              <div className="column column-half">
+                <label htmlFor="start-time">
+                  <i className="far fa-clock"></i> Start
+                </label>
+                <input
+                  name="start-time"
+                  id="start-time"
+                  value={startTime}
+                  type="time"
+                  onChange={this.onStartTimeChange}
+                />
+              </div>
+              <div className="column column-half last-column">
+                <label htmlFor="end-time">
+                  <i className="far fa-clock"></i> End
+                </label>
+                <input
+                  name="end-time"
+                  id="end-time"
+                  value={endTime}
+                  type="time"
+                  onChange={this.onEndTimeChange}
+                />
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="end-time">
+                <i className="far fa-clock"></i> Total
+              </label>
+              <input
+                name="total-time"
+                id="total-time"
+                value={totalTime}
+                type="time"
+                onChange={this.onTotalTimeChange}
+              />
+              <Button
+                text="calculate total"
+                type="button"
+                name="link"
+                action={this.setTotalTime}
+              />
+            </div>
+            <div className="form-group">
+              <div className="column column-half">
+                <label htmlFor="description">
+                  <i className="fas fa-pen-alt"></i> Note
+                </label>
+                <textarea
+                  name="description"
+                  id="description"
+                  value={description}
+                  placeholder="Description"
+                  onChange={this.onDescriptionChange}
+                />
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="invoiced">Invoiced</label>
@@ -110,8 +236,8 @@ export class HoursForm extends React.Component {
                 type="checkbox"
                 name="invoiced"
                 id="invoiced"
-                checked={this.state.invoiced}
-                value={this.state.invoiced}
+                checked={invoiced}
+                value={invoiced}
                 onChange={this.onInvoicedChange}
               />
             </div>
@@ -119,7 +245,7 @@ export class HoursForm extends React.Component {
             type="submit"
             color="primary"
             text={submitButtonLabel}
-            disabled={!this.state.client || !this.state.date}
+            disabled={!client || !date}
           />
         </form>
       </div>

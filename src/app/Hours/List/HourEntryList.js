@@ -1,5 +1,5 @@
 import React from 'react';
-import selectHourEntries from '../selectors/hourEntries';
+import { selectHourEntries } from '../selectors/hourEntries';
 import { connect } from 'react-redux';
 import Table from '../../../ui/Table/Table';
 import TableHeaderCell from '../../../ui/Table/TableHeaderCell';
@@ -7,45 +7,47 @@ import HourEntryListItem from './HourEntryListItem';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { selectProjectById } from '../../Projects/selectors/projects';
 import { selectClientById } from '../../Clients';
+import { sortByDate } from '../actions/filters';
 
 export class HourEntryList extends React.Component {
 
   constructor(props) {
     super(props);
+
   }
 
   render() {
     const { hourEntries, projects, clients, dispatch } = this.props;
-    console.log(hourEntries);
     return (
       <Table>
         <TableHeaderRow>
           <TableHeaderCell
-            // action={() => {
-            //   dispatch(sortByTitle());
-            // }}
+            action={() => {
+              dispatch(sortByDate());
+            }}
           >
             date
           </TableHeaderCell>
-          <TableHeaderCell
-            // action={() => {
-            //   dispatch(sortByTitle());
-            // }}
-          >
+          <TableHeaderCell>
             client
           </TableHeaderCell>
-          <TableHeaderCell
-            // action={() => {
-            //   dispatch(sortByTitle());
-            // }}
-          >
+          <TableHeaderCell>
             project
           </TableHeaderCell>
+          <TableHeaderCell>
+            note
+          </TableHeaderCell>
+          <TableHeaderCell>
+            start
+          </TableHeaderCell>
+          <TableHeaderCell>
+            end
+          </TableHeaderCell>
           <TableHeaderCell
-            // action={() => {
-            //   dispatch(sortByFinished());
-            // }}
           >
+            time
+          </TableHeaderCell>
+          <TableHeaderCell>
             invoiced
           </TableHeaderCell>
         </TableHeaderRow>
@@ -62,7 +64,7 @@ export class HourEntryList extends React.Component {
 
 const mapStateToProps = ((state) => {
   return {
-    hourEntries: selectHourEntries(state.hourEntries),
+    hourEntries: selectHourEntries(state.hourEntries, state.hourFilters),
     projects: state.projects,
     clients: state.clients
   }

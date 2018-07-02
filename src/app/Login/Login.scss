@@ -1,0 +1,22 @@
+#login-frame {
+  background: rgba(0,0,0,0.05);
+  min-height: 100vh;
+}
+
+#login-frame .page-wrap {
+  padding: 0;
+}
+
+#login {
+  background: white;
+  text-align: center;
+  max-width: 80%;
+  margin: 20vh auto 0 auto;
+  -webkit-border-radius: .2rem;
+  -moz-border-radius: .2rem;
+  border-radius: .2rem;
+  padding: 2rem 8rem;
+  box-shadow: .05rem .05rem 1rem .05rem rgba(0,0,0,0.05);
+  -moz-box-shadow: .05rem .05rem 1rem .05rem rgba(0,0,0,0.05);
+  -webkit-box-shadow: .05rem .05rem 1rem .05rem rgba(0,0,0,0.05);
+}

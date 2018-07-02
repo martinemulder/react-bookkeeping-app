@@ -5,4 +5,4 @@ export { ClientCreate } from './Create/ClientCreate';
 
 export { ClientEdit } from './Edit/ClientEdit';
 
-export { selectClients, selectClientById } from './selectors/clients';
+export { selectClients, selectClientById, selectActiveClients } from './selectors/clients';

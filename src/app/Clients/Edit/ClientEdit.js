@@ -17,10 +17,12 @@ export class ClientEdit extends React.Component {
 
   render() {
     const { client, dispatch, history } = this.props;
-    console.log(client);
     return (
-      <AppFrame>
-        <h1>Edit client</h1>
+      <AppFrame
+        title="Edit client"
+        parent={toClientDashboard()}
+        parentText="back to clients"
+      >
         <ClientForm
           submitButtonLabel="Save changes"
           onSubmit={this.onSubmit}

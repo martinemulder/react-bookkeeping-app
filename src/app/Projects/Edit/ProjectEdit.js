@@ -5,6 +5,7 @@ import ProjectForm from '../Form/ProjectForm';
 import AppFrame from '../../../ui/AppFrame/AppFrame';
 import { toProjectDashboard } from '../../../routes/links';
 import Button from '../../../ui/Button/Button';
+import { selectActiveClients } from '../../Clients/selectors/clients';
 
 export class ProjectEdit extends React.Component {
 
@@ -16,14 +17,18 @@ export class ProjectEdit extends React.Component {
   };
 
   render() {
-    const { project, dispatch, history } = this.props;
+    const { project, dispatch, history, clientList } = this.props;
     return (
-      <AppFrame>
-        <h1>Edit project</h1>
+      <AppFrame
+        title="Edit project"
+        parent={toProjectDashboard()}
+        parentText="back to projects"
+      >
         <ProjectForm
           submitButtonLabel="Save changes"
           onSubmit={this.onSubmit}
           project={project}
+          clientList={clientList}
         />
         <Button
           text="Remove this project"
@@ -42,7 +47,8 @@ export class ProjectEdit extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    project: state.projects.find((project) => project.id === props.match.params.id)
+    project: state.projects.find((project) => project.id === props.match.params.id),
+    clientList: state.clients
   }
 };
 
