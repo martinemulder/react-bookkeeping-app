@@ -5,7 +5,7 @@ import Table from '../../../ui/Table/Table';
 import TableHeaderCell from '../../../ui/Table/TableHeaderCell';
 import HourEntryListItem from './HourEntryListItem';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
-import { selectProjectById } from '../../Projects/selectors/projects';
+import { selectProjectById } from '../../Projects';
 import { selectClientById } from '../../Clients';
 import { sortByDate } from '../actions/filters';
 
@@ -13,7 +13,6 @@ export class HourEntryList extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   render() {

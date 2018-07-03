@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from '../../../ui/Button/Button';
-import {SingleDatePicker} from "react-dates";
+import {SingleDatePicker} from 'react-dates';
 import moment from 'moment';
-import { selectTotalTime } from '../selectors/hourEntries';
 import { toClientCreate, toProjectCreate } from '../../../routes/links';
 import { Link } from 'react-router-dom';
+import { selectTotalTime } from '../selectors/hourEntries';
 
 export class HoursForm extends React.Component {
 

@@ -6,7 +6,7 @@ import TableHeaderCell from '../../../ui/Table/TableHeaderCell';
 import ProjectListItem from './ProjectListItem';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { sortByFinished, sortByPrice, sortByTitle } from '../actions/filters';
-import {selectClientById} from "../../Clients/selectors/clients";
+import { selectClientById } from '../../Clients';
 
 export class ProjectList extends React.Component {
 

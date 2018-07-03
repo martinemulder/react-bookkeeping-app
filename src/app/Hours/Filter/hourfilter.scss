@@ -1,0 +1,30 @@
+#hour-filter {
+  margin-bottom: 2.3rem;
+}
+
+#hour-filter-fields {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  float: left;
+}
+
+#hour-filter label {
+  margin-right: .1rem;
+}
+
+#hour-filter button {
+  margin-bottom: 0;
+}
+
+#hour-filter select {
+  max-width: 10rem;
+}
+
+#hour-filter, #hour-filter select {
+  color: #757575;
+}
+
+#hour-filter .DateRangePicker, #hour-filter select {
+  margin-right: 1.2rem;
+}

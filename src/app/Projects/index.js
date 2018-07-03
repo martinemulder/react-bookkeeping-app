@@ -5,4 +5,4 @@ export { ProjectCreate } from './Create/ProjectCreate';
 
 export { ProjectEdit } from './Edit/ProjectEdit';
 
-export { selectProjects, selectProjectById, selectActiveProjects } from './selectors/projects';
+export { selectProjects, selectProjectById } from './selectors/projects';
