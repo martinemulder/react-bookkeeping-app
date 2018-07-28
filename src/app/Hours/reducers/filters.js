@@ -5,8 +5,8 @@ const filtersReducerDefaultState = [{
   client: '',
   project: '',
   invoiced: '',
-  startDate: moment().startOf('month'),
-  endDate: moment().endOf('month')
+  startDate: moment().startOf('year'),
+  endDate: moment().endOf('year')
 }];
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {

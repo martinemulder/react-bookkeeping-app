@@ -19,7 +19,7 @@ export class HoursForm extends React.Component {
       endTime: props.hourEntry ? props.hourEntry.endTime : '',
       totalTime: props.hourEntry ? props.hourEntry.totalTime : '',
       description: props.hourEntry ? props.hourEntry.description : '',
-      invoiced: props.hourEntry ? props.hourEntry.invoiced: false,
+      invoiced: props.hourEntry ? props.hourEntry.invoiced: '',
       submitting: false,
       focused: false,
       error: ''
@@ -46,6 +46,16 @@ export class HoursForm extends React.Component {
     this.setState(() => ({ startTime }));
   };
 
+  setStartTimeNow = () => {
+    const startTime = moment().format('HH:mm');
+    this.setState(() => ({ startTime }));
+  };
+
+  setEndTimeNow = () => {
+    const endTime = moment().format('HH:mm');
+    this.setState(() => ({ endTime }));
+  };
+
   setTotalTime = () => {
     const { startTime, endTime } = this.state;
     if (startTime && endTime) {
@@ -69,8 +79,8 @@ export class HoursForm extends React.Component {
     this.setState(() => ({ description }));
   };
 
-  onInvoicedChange = () => {
-    const invoiced = !this.state.invoiced;
+  onInvoicedChange = (e) => {
+    const invoiced = e.target.value;
     this.setState(() => ({ invoiced }));
   };
 
@@ -184,6 +194,12 @@ export class HoursForm extends React.Component {
                   type="time"
                   onChange={this.onStartTimeChange}
                 />
+                <Button
+                  text="now"
+                  type="button"
+                  name="link"
+                  action={this.setStartTimeNow}
+                />
               </div>
               <div className="column column-half last-column">
                 <label htmlFor="end-time">
@@ -195,6 +211,12 @@ export class HoursForm extends React.Component {
                   value={endTime}
                   type="time"
                   onChange={this.onEndTimeChange}
+                />
+                <Button
+                  text="now"
+                  type="button"
+                  name="link"
+                  action={this.setEndTimeNow}
                 />
               </div>
             </div>
@@ -233,13 +255,26 @@ export class HoursForm extends React.Component {
             <div className="form-group">
               <label htmlFor="invoiced">Invoiced</label>
               <input
-                type="checkbox"
+                type="radio"
                 name="invoiced"
-                id="invoiced"
-                checked={invoiced}
-                value={invoiced}
+                value="yes"
+                checked={invoiced === "yes"}
                 onChange={this.onInvoicedChange}
-              />
+                /> Yes
+              <input
+                type="radio"
+                name="invoiced"
+                value="no"
+                checked={invoiced === "no"}
+                onChange={this.onInvoicedChange}
+              /> No
+              <input
+                type="radio"
+                name="invoiced"
+                value="n/a"
+                checked={invoiced === "n/a"}
+                onChange={this.onInvoicedChange}
+              /> N/A
             </div>
           <Button
             type="submit"

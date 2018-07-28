@@ -41,7 +41,7 @@ export const startAddHourEntry = (hourEntryData = {}) => {
       endTime = '',
       totalTime = '',
       description = '',
-      invoiced = false
+      invoiced = ''
     } = hourEntryData;
     const hourEntry = { project, client, date, startTime, endTime, totalTime, description, invoiced };
 

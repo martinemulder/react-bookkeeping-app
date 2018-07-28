@@ -21,7 +21,7 @@ export const selectProjectsFromClient = (projects, { selectedClient = ''}) => {
   const clientProjects = [];
 
   projects.map((project) => {
-    if (project.client === selectedClient) {
+    if (project.client === selectedClient && !project.finished) {
       clientProjects.push(project)
     }
   });

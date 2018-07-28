@@ -8,6 +8,8 @@ import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { selectProjectById } from '../../Projects';
 import { selectClientById } from '../../Clients';
 import { sortByDate } from '../actions/filters';
+import { toHourEntryEdit } from "../../../routes/links";
+import { withRouter } from "react-router-dom";
 
 export class HourEntryList extends React.Component {
 
@@ -15,45 +17,64 @@ export class HourEntryList extends React.Component {
     super(props);
   }
 
+  onEditHourEntry = (id) => {
+    this.props.history.push(
+      toHourEntryEdit(id)
+    )
+  };
+
   render() {
     const { hourEntries, projects, clients, dispatch } = this.props;
     return (
       <Table>
         <TableHeaderRow>
+          <TableHeaderCell>
+          </TableHeaderCell>
           <TableHeaderCell
+            name="date"
             action={() => {
               dispatch(sortByDate());
             }}
           >
             date
           </TableHeaderCell>
-          <TableHeaderCell>
+          <TableHeaderCell name="client">
             client
           </TableHeaderCell>
-          <TableHeaderCell>
+          <TableHeaderCell name="project">
             project
           </TableHeaderCell>
-          <TableHeaderCell>
+          <TableHeaderCell name="note">
             note
           </TableHeaderCell>
-          <TableHeaderCell>
+          <TableHeaderCell name="time">
             start
           </TableHeaderCell>
-          <TableHeaderCell>
+          <TableHeaderCell name="time">
             end
           </TableHeaderCell>
-          <TableHeaderCell
-          >
+          <TableHeaderCell name="time">
             time
           </TableHeaderCell>
-          <TableHeaderCell>
+          <TableHeaderCell name="invoiced">
             invoiced
+          </TableHeaderCell>
+          <TableHeaderCell>
+            actions
           </TableHeaderCell>
         </TableHeaderRow>
         {hourEntries.map((hourEntry) => {
           const project = selectProjectById(hourEntry.project, projects);
           const client = selectClientById(hourEntry.client, clients);
-          return <HourEntryListItem key={hourEntry.id} hourEntry={hourEntry} project={project ? project : ''} client={client} />
+          return (
+          <HourEntryListItem
+            key={hourEntry.id}
+            hourEntry={hourEntry}
+            project={project ? project : ''}
+            client={client}
+            onHourEntryEdit={(id) => this.onEditHourEntry(id)}
+          />
+          )
         })}
       </Table>
     )
@@ -61,12 +82,12 @@ export class HourEntryList extends React.Component {
 
 }
 
-const mapStateToProps = ((state) => {
+const mapStateToProps = (state) => {
   return {
     hourEntries: selectHourEntries(state.hourEntries, state.hourFilters),
     projects: state.projects,
     clients: state.clients
   }
-});
+};
 
-export default connect(mapStateToProps)(HourEntryList);
+export default withRouter(connect(mapStateToProps)(HourEntryList));

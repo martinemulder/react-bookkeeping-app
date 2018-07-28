@@ -7,12 +7,20 @@ import ProjectListItem from './ProjectListItem';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { sortByFinished, sortByPrice, sortByTitle } from '../actions/filters';
 import { selectClientById } from '../../Clients';
+import { toProjectEdit} from '../../../routes/links';
+import { withRouter } from 'react-router-dom';
 
 export class ProjectList extends React.Component {
 
   constructor(props) {
     super(props);
   }
+
+  onEditProject = (id) => {
+    this.props.history.push(
+      toProjectEdit(id)
+    )
+  };
 
   render() {
     const { projects, dispatch, clients } = this.props;
@@ -43,10 +51,17 @@ export class ProjectList extends React.Component {
           >
             finished
           </TableHeaderCell>
+          <TableHeaderCell>
+            actions
+          </TableHeaderCell>
         </TableHeaderRow>
         {projects.map((project) => {
           const client = selectClientById(project.client, clients);
-          return <ProjectListItem key={project.id} project={project} client={client} />
+          return <ProjectListItem
+            key={project.id}
+            project={project}
+            client={client}
+            onEditProject={(id) => this.onEditProject(id)} />
         })}
       </Table>
     )
@@ -62,4 +77,4 @@ const mapStateToProps = ((state) => {
   }
 });
 
-export default connect(mapStateToProps)(ProjectList);
+export default withRouter(connect(mapStateToProps)(ProjectList));

@@ -20,13 +20,28 @@ button.filter-button {
 }
 
 button.primary {
-  background: white;
+  background: transparent;
   border-color: $primary-button-border;
   color: darken($primary-button-border, 6%);
 }
 
+button.icon-button {
+  background: transparent;
+  display: inline;
+  border: none;
+  margin: 0;
+  padding: 0;
+  color: $primary;
+}
+
+button[data-icon="edit"]:after {
+  content: '\f305';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+}
+
 button.secondary {
-  background: white;
+  background: transparent;
   border-color: $secondary-button-border;
   color: darken($secondary-button-border, 6%);
 }

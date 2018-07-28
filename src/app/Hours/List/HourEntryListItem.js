@@ -1,37 +1,66 @@
 import React from 'react';
-import { toHourEntryEdit } from '../../../routes/links';
 import TableRow from '../../../ui/Table/TableRow';
 import TableCell from '../../../ui/Table/TableCell';
+import Button from "../../../ui/Button/Button";
 
-const HoursListItem = ({hourEntry, project, client}) => (
-  <TableRow
-    link={toHourEntryEdit(hourEntry.id)}
-  >
-    <TableCell>
+const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit }) => (
+  <TableRow>
+    <TableCell
+      name="select"
+    >
+      <input type="checkbox" />
+    </TableCell>
+    <TableCell
+      name="date"
+    >
       {hourEntry.date}
     </TableCell>
-    <TableCell>
+    <TableCell
+      name="client"
+    >
       {client.name}
     </TableCell>
-    <TableCell>
+    <TableCell
+      name="project"
+    >
       {project.title}
     </TableCell>
-    <TableCell>
+    <TableCell
+      name="note"
+    >
       {hourEntry.description}
     </TableCell>
-    <TableCell>
+    <TableCell
+      name="time"
+    >
       {hourEntry.startTime}
     </TableCell>
-    <TableCell>
+    <TableCell
+      name="time"
+    >
       {hourEntry.endTime}
     </TableCell>
-    <TableCell>
+    <TableCell
+      name="time"
+    >
       {hourEntry.totalTime}
     </TableCell>
-    <TableCell>
-      {hourEntry.invoiced && <i className="fas fa-check"></i>}
+    <TableCell
+      name="invoiced"
+    >
+      {hourEntry.invoiced === 'yes' && <i className="fas fa-check"></i>}
+      {hourEntry.invoiced === 'n/a' && hourEntry.invoiced}
+    </TableCell>
+    <TableCell
+      name="actions"
+    >
+      <Button
+        name="icon"
+        icon="edit"
+        action={() => {onHourEntryEdit(hourEntry.id)}}
+      />
     </TableCell>
   </TableRow>
 );
 
-export default HoursListItem;
+export default HourEntryListItem;

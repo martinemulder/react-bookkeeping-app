@@ -1,17 +1,15 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 export default class TableRow extends React.Component {
 
   render() {
-    const link = this.props.link ? this.props.link : '';
+    const { children } = this.props;
     return (
-      <Link
-        className={"table-row " + (link ? 'active': 'not-active')}
-        to={link}
+      <div
+        className={"table-row"}
       >
-        {this.props.children}
-      </Link>
+        {children}
+      </div>
     )
   }
 

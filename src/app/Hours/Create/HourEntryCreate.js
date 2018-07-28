@@ -6,6 +6,7 @@ import AppFrame from '../../../ui/AppFrame/AppFrame';
 import { toHoursDashboard } from '../../../routes/links';
 import { selectProjectsFromClient } from '../../Projects/selectors/projects';
 import {setSelectedClient} from "../../Projects/actions/filters";
+import {selectActiveClients} from "../../Clients/selectors/clients";
 
 export class HoursCreate extends React.Component {
 
@@ -52,7 +53,7 @@ export class HoursCreate extends React.Component {
 const mapStateToProps = ((state) => {
   return {
     projectList: selectProjectsFromClient(state.projects, state.projectFilters),
-    clientList: state.clients
+    clientList: selectActiveClients(state.clients)
   }
 });
 

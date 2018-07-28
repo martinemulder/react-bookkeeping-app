@@ -8,7 +8,9 @@ import {
   setStartDate
 } from '../actions/filters';
 import { selectActiveClients } from '../../Clients/selectors/clients';
-import moment from "moment";
+import moment from 'moment';
+import { setSelectedClient } from '../../Projects/actions/filters';
+import { selectProjectsFromClient } from '../../Projects/selectors/projects';
 
 export class HourFilter extends React.Component {
 
@@ -21,7 +23,6 @@ export class HourFilter extends React.Component {
       client: props.filters.client,
       project: props.filters.project,
       invoiced: props.filters.invoiced,
-      checked: props.filters.invoiced === 'yes',
       focused: null
     };
   }
@@ -37,6 +38,11 @@ export class HourFilter extends React.Component {
   onClientChange = (e) => {
     const client = e.target.value;
     this.setState(() => ({ client }));
+    this.onSelectClient(client);
+  };
+
+  onSelectClient = (client) => {
+    this.props.dispatch(setSelectedClient(client))
   };
 
   onProjectChange = (e) => {
@@ -45,13 +51,8 @@ export class HourFilter extends React.Component {
   };
 
   onInvoicedChange = (e) => {
-    const checked = e.target.checked;
-    this.setState(() => ({ checked }));
-    if (checked) {
-      this.setState(() => ({ invoiced: 'yes' }));
-    } else {
-      this.setState(() => ({ invoiced: 'no' }));
-    }
+    const invoiced = e.target.value;
+    this.setState(() => ({ invoiced }));
   };
 
   onActivateFilter = () => {
@@ -64,12 +65,12 @@ export class HourFilter extends React.Component {
 
   onResetFilter = () => {
     this.props.dispatch(resetFilter());
-    this.setState(() => ({ invoiced: '', checked : false, client : '', project: '',
+    this.setState(() => ({ invoiced: '', client : '', project: '',
       startDate: moment().startOf('month'), endDate: moment().endOf('month') }));
   };
 
   render() {
-    const { startDate, endDate, focused, client, project, checked } = this.state;
+    const { startDate, endDate, focused, client, project, invoiced } = this.state;
     const { clientList, projectList } = this.props;
     return (
       <div id="hour-filter">
@@ -107,12 +108,26 @@ export class HourFilter extends React.Component {
           </select>
           <label htmlFor="invoiced">Invoiced</label>
           <input
-            type="checkbox"
+            type="radio"
             name="invoiced"
-            id="invoiced"
-            checked={checked}
+            value="yes"
+            checked={invoiced === "yes"}
             onChange={this.onInvoicedChange}
-          />
+          /> Yes
+          <input
+            type="radio"
+            name="invoiced"
+            value="no"
+            checked={invoiced === "no"}
+            onChange={this.onInvoicedChange}
+          /> No
+          <input
+            type="radio"
+            name="invoiced"
+            value="n/a"
+            checked={invoiced === "n/a"}
+            onChange={this.onInvoicedChange}
+          /> N/A
         </div>
         <Button
           text="reset filter"
@@ -136,7 +151,7 @@ const mapStateToProps = (state) => {
   return {
     filters: state.hourFilters,
     clientList: selectActiveClients(state.clients),
-    projectList: state.projects
+    projectList: selectProjectsFromClient(state.projects, state.projectFilters)
   };
 };
 

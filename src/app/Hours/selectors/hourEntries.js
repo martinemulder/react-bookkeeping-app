@@ -8,10 +8,9 @@ export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate
     const endDateMatch = endDate ? endDate.isSameOrAfter(date, 'day') : true;
     const clientMatch = client ? hourEntry.client === client : true;
     const projectMatch = project ? hourEntry.project === project : true;
-    const invoicedYesMatch = invoiced === 'yes' ? hourEntry.invoiced : true;
-    const invoicedNoMatch = invoiced === 'no' ? !hourEntry.invoiced : true;
+    const invoicedMatch = invoiced ? hourEntry.invoiced === invoiced : true;
 
-    return startDateMatch && endDateMatch && clientMatch && projectMatch && invoicedYesMatch && invoicedNoMatch;
+    return startDateMatch && endDateMatch && clientMatch && projectMatch && invoicedMatch;
 
   }).sort((a,b) => {
     if (sortBy === 'date_asc') {
@@ -19,14 +18,17 @@ export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate
     } else if (sortBy === 'date_desc') {
       return moment(a.date, 'DD-MM-YYYY').format('X') < moment(b.date, 'DD-MM-YYYY').format('X') ? 1 : -1;
     }
-  });
+  })
 };
 
 export const selectTotalHours = (hourEntries) => {
   let totalMinutes = 0;
 
   hourEntries.map((hourEntry) => {
-    totalMinutes = totalMinutes + timeToMinutes(hourEntry.totalTime)
+    const minutes = timeToMinutes(hourEntry.totalTime);
+    if (!isNaN(minutes)) {
+      totalMinutes = totalMinutes + minutes;
+    }
   });
 
   return minutesToTime(totalMinutes);
@@ -34,9 +36,10 @@ export const selectTotalHours = (hourEntries) => {
 
 export const timeToDecimal = (time) => {
   const arr = time.split(':');
-  const dec = parseInt((arr[1]/6)*10, 10);
-  time = parseFloat(parseInt(arr[0], 10) + '.' + (dec<10?'0':'') + dec);
-
+  let dec = parseFloat((arr[1] / 60) * 100);
+  dec = dec.toString().replace('.', '');
+  dec = parseInt(dec);
+  time = parseFloat(parseInt(arr[0], 10) + '.' + dec).toFixed(4);
   return time;
 };
 

@@ -7,7 +7,7 @@ import HourFilter from '../Filter/HourFilter';
 
 export class HourEntryDashboard extends React.Component {
 
-  createHours = () =>{
+  createHours = () => {
     this.props.history.push(
       toHourEntryCreate()
     );
@@ -26,7 +26,7 @@ export class HourEntryDashboard extends React.Component {
           }}
         />
         <HourFilter />
-        <HourEntryList />
+        <HourEntryList history={history} />
       </AppFrame>
     )
   }

@@ -199,6 +199,7 @@ form {
 
 input, textarea {
   padding: .5rem;
+  max-width: 100%;
 }
 
 form textarea, form select {
@@ -248,7 +249,7 @@ label i {
   margin-right: .5rem;
 }
 
-input[type="checkbox"] {
+input[type="checkbox"], input[type="radio"] {
   width: 20px;
   height: 20px;
   background: white;
@@ -257,7 +258,14 @@ input[type="checkbox"] {
   vertical-align: bottom;
 }
 
-input[type="checkbox"]:hover, input[type="checkbox"]:checked {
+input[type="radio"] {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  margin: 0 6px;
+}
+
+input[type="checkbox"]:hover, input[type="checkbox"]:checked, input[type="radio"]:hover, input[type="radio"]:checked {
   background: $support;
 }
 

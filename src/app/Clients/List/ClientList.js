@@ -6,12 +6,20 @@ import Table from '../../../ui/Table/Table';
 import TableHeaderCell from '../../../ui/Table/TableHeaderCell';
 import { sortByActive, sortByName } from '../actions/filters';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
+import { toClientEdit } from '../../../routes/links';
+import { withRouter } from 'react-router-dom';
 
 export class ClientList extends React.Component {
 
   constructor(props) {
     super(props);
   }
+
+  onEditClient = (id) => {
+    this.props.history.push(
+      toClientEdit(id)
+    )
+  };
 
   render() {
     const { clients, dispatch } = this.props;
@@ -31,9 +39,16 @@ export class ClientList extends React.Component {
            }}>
            active
          </TableHeaderCell>
+         <TableHeaderCell>
+           actions
+         </TableHeaderCell>
        </TableHeaderRow>
         {clients.map((client) => {
-          return <ClientListItem key={client.id} {...client} />
+          return <ClientListItem
+            key={client.id}
+            client = {client}
+            onEditClient={(id) => this.onEditClient(id)}
+          />
         })}
       </Table>
     )
@@ -48,4 +63,4 @@ const mapStateToProps = ((state) => {
   }
 });
 
-export default connect(mapStateToProps)(ClientList);
+export default withRouter(connect(mapStateToProps)(ClientList));

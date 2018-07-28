@@ -10,20 +10,49 @@
 .table-header-cell {
   display: table-cell;
   color: rgba(0,0,0,.75);
+  padding: .5rem;
   border-bottom: .1rem dashed rgba(0,0,0,.075);
 }
 
 .table-header-cell, .table-cell {
   border-right: .1rem dashed rgba(0,0,0,.075);
-  padding: 0 1rem;
-  height: 2rem;
-  line-height: 2rem;
 }
 
-.table-cell {
+.table-cell, .table-header-cell {
   display: table-cell;
+  //float: left;
+  width: auto;
+  overflow: hidden;
 }
 
+//.table-cell.date-cell, .table-header-cell.date-cell {
+//  width: 10%;
+//}
+//
+//.table-cell.time-cell, .table-header-cell.time-cell, .table-cell.invoiced-cell, .table-header-cell.invoiced-cell {
+//  width: 5%;
+//}
+//
+//.table-cell.client-cell, .table-header-cell.client-cell {
+//  width: 15%;
+//}
+//
+//.table-cell.project-cell, .table-header-cell.project-cell {
+//  width: 25%;
+//}
+//
+//.table-cell.note-cell, .table-header-cell.note-cell {
+//  width: 30%;
+//}
+
+.inner-table-cell {
+  padding: .5rem;
+  white-space: nowrap;
+}
+
+.inner-table-cell, .table-header-cell {
+  line-height: 1.2rem;
+}
 .table-row, .table-header-row {
   display: table-row;
 }
@@ -40,13 +69,13 @@
   text-align: center;
 }
 
-.table-row.active:hover {
+.table-cell.active:hover {
   background: opacify($secondary, 0.1);
 }
 
-.not-active {
-  pointer-events: none;
-}
+//.not-active {
+//  pointer-events: none;
+//}
 
 .table-header-cell a {
   float: right;
