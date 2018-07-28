@@ -10,15 +10,15 @@ import { setSelectedClient } from '../../Projects/actions/filters';
 
 export class HoursEdit extends React.Component {
 
+  state = {
+    client: ''
+  };
+
   constructor(props) {
     super(props);
     const hourEntry = this.props.hourEntry;
     this.props.dispatch(setSelectedClient(hourEntry.client))
   }
-
-  state = {
-    client: ''
-  };
 
   onSubmit = (hourEntry) => {
     this.props.dispatch(startEditHourEntry(this.props.hourEntry.id, hourEntry));

@@ -8,8 +8,9 @@ import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { selectProjectById } from '../../Projects';
 import { selectClientById } from '../../Clients';
 import { sortByDate } from '../actions/filters';
-import { toHourEntryEdit } from "../../../routes/links";
+import {toHourEntryEdit, toHoursDashboard} from "../../../routes/links";
 import { withRouter } from "react-router-dom";
+import {startAddHourEntry} from "../actions/hourEntries";
 
 export class HourEntryList extends React.Component {
 
@@ -21,6 +22,10 @@ export class HourEntryList extends React.Component {
     this.props.history.push(
       toHourEntryEdit(id)
     )
+  };
+
+  onDuplicateHourEntry = (hourEntry) => {
+    this.props.dispatch(startAddHourEntry(hourEntry));
   };
 
   render() {
@@ -73,6 +78,7 @@ export class HourEntryList extends React.Component {
             project={project ? project : ''}
             client={client}
             onHourEntryEdit={(id) => this.onEditHourEntry(id)}
+            onHourEntryDuplicate={(hourEntry) => this.onDuplicateHourEntry(hourEntry)}
           />
           )
         })}

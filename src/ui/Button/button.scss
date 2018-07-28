@@ -32,12 +32,21 @@ button.icon-button {
   margin: 0;
   padding: 0;
   color: $primary;
+  margin-right: 3px;
+}
+
+button.icon-button:after {
+  font-family: 'Font Awesome 5 Free';
 }
 
 button[data-icon="edit"]:after {
   content: '\f305';
-  font-family: 'Font Awesome 5 Free';
   font-weight: 900;
+}
+
+button[data-icon="duplicate"]:after {
+  content: '\f24d';
+  font-weight: 600;
 }
 
 button.secondary {
