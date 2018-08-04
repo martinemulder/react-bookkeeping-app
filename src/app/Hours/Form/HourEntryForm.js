@@ -87,6 +87,8 @@ export class HoursForm extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
+    console.log(this.state.totalTime);
+
     if (!this.state.client || !this.state.date) {
       this.setState(() => ({error: 'Please provide a client and a date'}));
     } else {
@@ -98,6 +100,8 @@ export class HoursForm extends React.Component {
         totalTime = selectTotalTime(this.state.startTime, this.state.endTime);
       } else if (this.state.totalTime) {
         totalTime = this.state.totalTime;
+      } else {
+        totalTime = '';
       }
 
       this.props.onSubmit({
@@ -265,7 +269,7 @@ export class HoursForm extends React.Component {
                 type="radio"
                 name="invoiced"
                 value="no"
-                checked={invoiced === "no"}
+                checked={invoiced === "no" || !invoiced}
                 onChange={this.onInvoicedChange}
               /> No
               <input

@@ -32,7 +32,7 @@ button.icon-button {
   margin: 0;
   padding: 0;
   color: $primary;
-  margin-right: 3px;
+  margin-right: 5px;
 }
 
 button.icon-button:after {
@@ -46,6 +46,11 @@ button[data-icon="edit"]:after {
 
 button[data-icon="duplicate"]:after {
   content: '\f24d';
+  font-weight: 600;
+}
+
+button[data-icon="delete"]:after {
+  content: '\f2ed';
   font-weight: 600;
 }
 

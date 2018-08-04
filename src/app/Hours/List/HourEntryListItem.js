@@ -3,7 +3,7 @@ import TableRow from '../../../ui/Table/TableRow';
 import TableCell from '../../../ui/Table/TableCell';
 import Button from "../../../ui/Button/Button";
 
-const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHourEntryDuplicate }) => (
+const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHourEntryDuplicate, onHourEntryDelete }) => (
   <TableRow>
     <TableCell
       name="select"
@@ -63,6 +63,11 @@ const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHour
         name="icon"
         icon="duplicate"
         action={() => {onHourEntryDuplicate(hourEntry)}}
+      />
+      <Button
+        name="icon"
+        icon="delete"
+        action={() => {onHourEntryDelete({id: hourEntry.id})}}
       />
     </TableCell>
   </TableRow>
