@@ -31,4 +31,3 @@ export const setInvoiced = (invoiced = '') => ({
 export const resetFilter = () => ({
   type: 'RESET_FILTER'
 });
-

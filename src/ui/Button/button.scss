@@ -25,6 +25,15 @@ button.primary {
   color: darken($primary-button-border, 6%);
 }
 
+button.inline-button {
+  color: $primary;
+  margin-bottom: 0;
+}
+
+button.inline-button:hover {
+  text-decoration: underline;
+}
+
 button.icon-button {
   background: transparent;
   display: inline;

@@ -5,6 +5,7 @@ import projectsReducer from '../app/Projects/reducers/projects';
 import clientFiltersReducer from '../app/Clients/reducers/filters';
 import projectFiltersReducer from '../app/Projects/reducers/filters';
 import hoursReducer from '../app/Hours/reducers/hourEntries';
+import selectedHoursReducer from '../app/Hours/reducers/selectedHourEntries';
 import hoursFiltersReducer from '../app/Hours/reducers/filters';
 import authReducer from '../app/Login/reducers/auth';
 
@@ -16,6 +17,7 @@ export default () => {
       clients: clientsReducer,
       projects: projectsReducer,
       hourEntries: hoursReducer,
+      selectedHourEntries: selectedHoursReducer,
       hourFilters: hoursFiltersReducer,
       clientFilters: clientFiltersReducer,
       projectFilters: projectFiltersReducer,

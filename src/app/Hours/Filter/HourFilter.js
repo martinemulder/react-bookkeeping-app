@@ -8,7 +8,6 @@ import {
   setStartDate
 } from '../actions/filters';
 import { selectActiveClients } from '../../Clients/selectors/clients';
-import moment from 'moment';
 import { setSelectedClient } from '../../Projects/actions/filters';
 import { selectProjectsFromClient } from '../../Projects/selectors/projects';
 
@@ -26,14 +25,6 @@ export class HourFilter extends React.Component {
       focused: null
     };
   }
-
-  onStartDateChange = (date) => {
-    this.setState(() => ({ startDate: date }));
-  };
-
-  onEndDateChange = (date) => {
-    this.setState(() => ({ endDate: date }));
-  };
 
   onClientChange = (e) => {
     const client = e.target.value;
@@ -66,7 +57,7 @@ export class HourFilter extends React.Component {
   onResetFilter = () => {
     this.props.dispatch(resetFilter());
     this.setState(() => ({ invoiced: '', client : '', project: '',
-      startDate: moment().startOf('month'), endDate: moment().endOf('month') }));
+      startDate: undefined, endDate: undefined }));
   };
 
   render() {

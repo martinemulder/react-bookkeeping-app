@@ -77,7 +77,7 @@ export class Sidebar extends React.Component {
 }
 
 const mapStateToProps = ((state) => {
-  const totalHours = selectTotalHours(selectHourEntries(state.hourEntries, state.hourFilters));
+  const totalHours = selectTotalHours(selectHourEntries(state.hourEntries, state.hourFilters), state.selectedHourEntries.selectedHourEntries);
   return {
     totalClients: state.clients.length,
     totalProjects: state.projects.length,

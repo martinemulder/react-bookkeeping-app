@@ -85,3 +85,19 @@ export const startEditHourEntry = (id, updates) => {
     });
   };
 };
+
+// MARK_AS_INVOICED
+export const markAsInvoicedHourEntry = (id, updates) => ({
+  type: 'EDIT_HOUR_ENTRY',
+  id,
+  updates
+});
+
+export const startMarkAsInvoicedHourEntry = (id, updates) => {
+  return (dispatch, getState) => {
+    const uid = getState().auth.uid;
+    return database.ref(`users/${uid}/hourEntries`).child(id).update(updates).then(() => {
+      dispatch(editHourEntry(id, updates));
+    });
+  };
+};

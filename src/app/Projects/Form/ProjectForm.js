@@ -12,7 +12,8 @@ export class ProjectForm extends React.Component {
       price: props.project ? props.project.price: '',
       finished: props.project ? props.project.finished: false,
       submitting: false,
-      error: ''
+      error: '',
+      markHourEntries: false
     };
   }
 
@@ -36,6 +37,11 @@ export class ProjectForm extends React.Component {
     this.setState(() => ({ finished }));
   };
 
+  onMarkHourEntriesChange = () => {
+    const markHourEntries = !this.state.markHourEntries;
+    this.setState(() => ({ markHourEntries }));
+  };
+
   onSubmit = (e) => {
     e.preventDefault();
 
@@ -50,11 +56,16 @@ export class ProjectForm extends React.Component {
         finished: this.state.finished
       });
     }
+
+    if (this.state.markHourEntries) {
+      this.props.onMarkHourEntries();
+      // mark hour entries
+    }
   };
 
   render() {
     const { submitButtonLabel, clientList } = this.props;
-    const { error, client, title, price, finished } = this.state;
+    const { error, client, title, price, finished, markHourEntries } = this.state;
     return (
       <div>
         {error && <p>{error}</p>}
@@ -115,6 +126,18 @@ export class ProjectForm extends React.Component {
                 value={finished}
                 onChange={this.onFinishedChange}
               />
+              <div hidden={!finished}>
+                <label htmlFor="markHourEntries">
+                </label>
+                <input
+                  type="checkbox"
+                  name="markHourEntries"
+                  id="markHourEntries"
+                  checked={markHourEntries}
+                  value={markHourEntries}
+                  onChange={this.onMarkHourEntriesChange}
+                /> Mark corresponding hour entries as invoiced
+              </div>
             </div>
           <Button
             type="submit"

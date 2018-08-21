@@ -87,8 +87,6 @@ export class HoursForm extends React.Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(this.state.totalTime);
-
     if (!this.state.client || !this.state.date) {
       this.setState(() => ({error: 'Please provide a client and a date'}));
     } else {

@@ -3,12 +3,15 @@ import TableRow from '../../../ui/Table/TableRow';
 import TableCell from '../../../ui/Table/TableCell';
 import Button from "../../../ui/Button/Button";
 
-const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHourEntryDuplicate, onHourEntryDelete }) => (
+const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHourEntryDuplicate, onHourEntryDelete, onSelectHourEntry }) => (
   <TableRow>
     <TableCell
       name="select"
     >
-      <input type="checkbox" />
+      <input
+        type="checkbox"
+        onClick={(e) => onSelectHourEntry(e, hourEntry)}
+      />
     </TableCell>
     <TableCell
       name="date"

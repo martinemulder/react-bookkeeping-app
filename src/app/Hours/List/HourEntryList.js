@@ -7,6 +7,7 @@ import HourEntryListItem from './HourEntryListItem';
 import TableHeaderRow from '../../../ui/Table/TableHeaderRow';
 import { selectProjectById } from '../../Projects';
 import { selectClientById } from '../../Clients';
+import { addSelectedHourEntry, removeSelectedHourEntry } from '../actions/selectedHourEntries';
 import { sortByDate } from '../actions/filters';
 import { toHourEntryEdit } from '../../../routes/links';
 import { withRouter } from 'react-router-dom';
@@ -30,6 +31,14 @@ export class HourEntryList extends React.Component {
 
   onHourEntryDelete = ({id}) => {
     this.props.dispatch(startRemoveHourEntry({id}));
+  };
+
+  onSelectHourEntry = (e, hourEntry) => {
+    if (e.target.checked) {
+      this.props.dispatch(addSelectedHourEntry(hourEntry))
+    } else {
+      this.props.dispatch(removeSelectedHourEntry(hourEntry.id))
+    }
   };
 
   render() {
@@ -84,6 +93,7 @@ export class HourEntryList extends React.Component {
             onHourEntryEdit={(id) => this.onEditHourEntry(id)}
             onHourEntryDuplicate={(hourEntry) => this.onDuplicateHourEntry(hourEntry)}
             onHourEntryDelete={({id}) => this.onHourEntryDelete({id})}
+            onSelectHourEntry={(e, hourEntry) => this.onSelectHourEntry(e, hourEntry)}
           />
           )
         })}

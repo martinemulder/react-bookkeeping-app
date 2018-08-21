@@ -21,7 +21,12 @@ export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate
   })
 };
 
-export const selectTotalHours = (hourEntries) => {
+export const selectTotalHours = (hourEntries, selectedHourEntries) => {
+
+  if (selectedHourEntries) {
+    hourEntries = selectedHourEntries;
+  }
+
   let totalMinutes = 0;
 
   hourEntries.map((hourEntry) => {
