@@ -23,7 +23,7 @@ export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate
 
 export const selectTotalHours = (hourEntries, selectedHourEntries) => {
 
-  if (selectedHourEntries) {
+  if (selectedHourEntries.length > 0) {
     hourEntries = selectedHourEntries;
   }
 
