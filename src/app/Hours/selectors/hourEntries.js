@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate, endDate, client, project, invoiced }) => {
-  return hourEntries.filter((hourEntry) => {
+  hourEntries = hourEntries.filter((hourEntry) => {
     const date = moment(hourEntry.date, 'DD-MM-YYYY');
 
     const startDateMatch = startDate ? startDate.isSameOrBefore(date, 'day') : true;
@@ -11,14 +11,29 @@ export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate
     const invoicedMatch = invoiced ? hourEntry.invoiced === invoiced : true;
 
     return startDateMatch && endDateMatch && clientMatch && projectMatch && invoicedMatch;
+  });
 
-  }).sort((a,b) => {
+  hourEntries = sortByDate(hourEntries, sortBy);
+  hourEntries = sortByTime(hourEntries);
+  return hourEntries;
+};
+
+const sortByDate = (hourEntries, sortBy) => {
+  return hourEntries.sort((a,b) => {
     if (sortBy === 'date_asc') {
       return moment(a.date, 'DD-MM-YYYY').format('X') > moment(b.date, 'DD-MM-YYYY').format('X') ? 1 : -1;
     } else if (sortBy === 'date_desc') {
       return moment(a.date, 'DD-MM-YYYY').format('X') < moment(b.date, 'DD-MM-YYYY').format('X') ? 1 : -1;
     }
-  })
+  });
+};
+
+const sortByTime = (hourEntries) => {
+  return hourEntries.sort((a,b) => {
+    if (a.date === b.date) {
+      return moment(a.startTime, 'h:i:s').format('X') < moment(b.startTime, 'h:i:s').format('X') ? 1 : -1;
+    }
+  });
 };
 
 export const selectTotalHours = (hourEntries, selectedHourEntries) => {

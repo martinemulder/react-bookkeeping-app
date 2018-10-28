@@ -1,12 +1,8 @@
-import moment from 'moment';
-
 const filtersReducerDefaultState = {
   sortBy: 'date_desc',
   client: '',
   project: '',
-  invoiced: '',
-  startDate: moment().startOf('month'),
-  endDate: moment().endOf('month')
+  invoiced: ''
 };
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
