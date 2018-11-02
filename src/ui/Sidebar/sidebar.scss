@@ -1,8 +1,46 @@
 #sidebar {
-  width: 15vw;
-  background: rgba(0, 0, 0, 0.05);
-  min-height: calc(100vh - 3.3rem);
+  position: absolute;
+  right: 0;
+  width: 20vw;
   padding: 2rem;
   font-size: 1.1rem;
   line-height: 1.7rem;
+  z-index: 2;
+  top: 0;
+  border: 0.2rem solid rgba(0, 0, 0, 0.015);
+  border-width: 0 0.2rem 0 0.2rem;
+}
+
+#open-sidebar, #sidebar {
+  background: rgba(242,242,242,1);
+  min-height: calc(100vh - 3.3rem);
+}
+
+#open-sidebar {
+  width: 60px;
+  text-align: center;
+  z-index: 1;
+  border: 0.2rem solid rgba(0, 0, 0, 0.015);
+  border-width: 0 0.2rem 0 0.2rem;
+}
+
+#close-sidebar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+#open-sidebar, #close-sidebar {
+  font-size: 1.2rem;
+  padding: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+#open-sidebar i, #close-sidebar i {
+  color: grey;
 }

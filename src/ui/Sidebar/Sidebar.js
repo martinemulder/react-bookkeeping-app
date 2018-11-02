@@ -7,7 +7,8 @@ export class Sidebar extends React.Component {
 
   state = {
     hourly: '',
-    total: ''
+    total: '',
+    open: false
   };
 
   constructor(props) {
@@ -34,43 +35,62 @@ export class Sidebar extends React.Component {
     this.setState({total});
   };
 
+  OnToggleSidebar = () => {
+    this.setState({open: !this.state.open});
+  };
+
   render() {
     const { totalHours, totalHoursDecimal } = this.props;
-    const { total, hourly } = this.state;
+    const { total, hourly, open } = this.state;
     return (
-      <div id="sidebar">
-        <br />
-        <h2><b>Summary</b></h2>
-        <p>
-          Total hours:<br />
-          <b>{totalHours} / {totalHoursDecimal}</b>
-        </p>
-
-        <h2><b>Calculate</b></h2>
-        <p>
-          <input
-            type="number"
-            placeholder="hourly"
-            value={hourly}
-            name="total"
-            onChange={this.onHourlyChange}
-          />
-        </p>
-        <p>
-          <Button
-            action={this.onCalculate}
-            text="Calculate"
-            color="secondary"
-          />
+      <div>
+        <button
+          id="open-sidebar"
+          onClick={this.OnToggleSidebar}
+        >
+          <i className="fas fa-bars"></i>
+        </button>
+        <div id="sidebar"
+             className={ open ? '' : 'hidden' }>
+          <button
+            id="close-sidebar"
+            onClick={this.OnToggleSidebar}
+          >
+            <i className="fas fa-times"></i>
+          </button>
           <br />
-          {total &&
-            <p>
-              <b>Subtotal: €{total}</b><br />
-              <b>VAT: €{(total * 0.21).toFixed(2)}</b><br />
-              <b>Total: €{(total * 1.21).toFixed(2)}</b>
-            </p>
-          }
-        </p>
+          <h2><b>Summary</b></h2>
+          <p>
+            Total hours:<br />
+            <b>{totalHours} / {totalHoursDecimal}</b>
+          </p>
+
+          <h2><b>Calculate</b></h2>
+          <p>
+            <input
+              type="number"
+              placeholder="hourly"
+              value={hourly}
+              name="total"
+              onChange={this.onHourlyChange}
+            />
+          </p>
+          <p>
+            <Button
+              action={this.onCalculate}
+              text="Calculate"
+              color="secondary"
+            />
+            <br />
+            {total &&
+              <p>
+                <b>Subtotal: €{total}</b><br />
+                <b>VAT: €{(total * 0.21).toFixed(2)}</b><br />
+                <b>Total: €{(total * 1.21).toFixed(2)}</b>
+              </p>
+            }
+          </p>
+        </div>
       </div>
     )
   }

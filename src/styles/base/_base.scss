@@ -165,7 +165,7 @@ i {
 }
 
 .content {
-  width: 80vw;
+  width: calc(100vw - 60px);
   padding: 0 2rem 6rem 0;
   position: relative;
 }
@@ -304,6 +304,10 @@ button[type="submit"] {
 
 .column-half.last-column {
   margin-right: 0!important;
+}
+
+.hidden {
+  display: none;
 }
 
 // Clearfix
