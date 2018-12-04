@@ -29,11 +29,6 @@ const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHour
       {project.title}
     </TableCell>
     <TableCell
-      name="note"
-    >
-      {hourEntry.description}
-    </TableCell>
-    <TableCell
       name="time"
     >
       {hourEntry.startTime}

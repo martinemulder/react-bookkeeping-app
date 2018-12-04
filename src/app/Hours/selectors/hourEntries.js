@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate, endDate, client, project, invoiced }) => {
+export const selectHourEntries = (hourEntries, { sortBy, startDate, endDate, client, project, invoiced }) => {
   hourEntries = hourEntries.filter((hourEntry) => {
     const date = moment(hourEntry.date, 'DD-MM-YYYY');
 
@@ -14,7 +14,7 @@ export const selectHourEntries = (hourEntries, { sortBy = 'date_desc', startDate
   });
 
   hourEntries = sortByDate(hourEntries, sortBy);
-  hourEntries = sortByTime(hourEntries);
+  hourEntries = sortByTime(hourEntries, sortBy);
   return hourEntries;
 };
 
@@ -28,10 +28,14 @@ const sortByDate = (hourEntries, sortBy) => {
   });
 };
 
-const sortByTime = (hourEntries) => {
+const sortByTime = (hourEntries, sortBy) => {
   return hourEntries.sort((a,b) => {
     if (a.date === b.date) {
-      return moment(a.startTime, 'h:i:s').format('X') < moment(b.startTime, 'h:i:s').format('X') ? 1 : -1;
+      if (sortBy === 'date_asc') {
+        return moment(a.startTime, 'h:i:s').format('X') > moment(b.startTime, 'h:i:s').format('X') ? 1 : -1;
+      } else {
+        return moment(a.startTime, 'h:i:s').format('X') < moment(b.startTime, 'h:i:s').format('X') ? 1 : -1;
+      }
     }
   });
 };

@@ -1,3 +1,4 @@
+
 const filtersReducerDefaultState = {
   sortBy: 'date_desc',
   client: '',
@@ -9,7 +10,7 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
     case 'RESET_FILTER':
       return {
-        filtersReducerDefaultState
+        ...filtersReducerDefaultState
       };
     case 'SORT_BY_DATE':
       if (state.sortBy === 'date_asc') {

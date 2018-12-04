@@ -6,10 +6,10 @@ import Button from '../../../ui/Button/Button';
 
 const ProjectListItem = ({ project, client, onEditProject }) => (
   <TableRow link={toProjectEdit(project.id)}>
+    <TableCell>{project.title}</TableCell>
     <TableCell>
       {client.name}
-      </TableCell>
-    <TableCell>{project.title}</TableCell>
+    </TableCell>
     <TableCell>{project.price ? '€' + project.price : '?'}</TableCell>
     <TableCell>{project.finished && <i className="fas fa-check"></i>}</TableCell>
     <TableCell

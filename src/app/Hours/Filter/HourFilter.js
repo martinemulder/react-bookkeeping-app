@@ -56,6 +56,7 @@ export class HourFilter extends React.Component {
 
   onResetFilter = () => {
     this.props.dispatch(resetFilter());
+
     this.setState(() => ({ invoiced: '', client : '', project: '',
       startDate: undefined, endDate: undefined }));
   };

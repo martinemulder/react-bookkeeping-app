@@ -11,7 +11,7 @@ export default class AppFrame extends React.Component {
     return (
       <div id="app-frame">
         <Header />
-        <div className="content-wrap page-wrap">
+        <div id="page-wrap" className="content-wrap">
           <div className="content">
             <div className="page-nav">
               {parent &&

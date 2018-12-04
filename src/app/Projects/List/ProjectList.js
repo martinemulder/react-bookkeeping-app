@@ -27,15 +27,15 @@ export class ProjectList extends React.Component {
     return (
       <Table>
         <TableHeaderRow>
-          <TableHeaderCell>
-            client
-          </TableHeaderCell>
           <TableHeaderCell
             action={() => {
               dispatch(sortByTitle());
             }}
           >
             title
+          </TableHeaderCell>
+          <TableHeaderCell>
+            client
           </TableHeaderCell>
           <TableHeaderCell
             action={() => {
@@ -44,11 +44,7 @@ export class ProjectList extends React.Component {
           >
             price
           </TableHeaderCell>
-          <TableHeaderCell
-            action={() => {
-              dispatch(sortByFinished());
-            }}
-          >
+          <TableHeaderCell>
             finished
           </TableHeaderCell>
           <TableHeaderCell>

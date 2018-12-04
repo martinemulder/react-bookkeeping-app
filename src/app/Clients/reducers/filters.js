@@ -1,7 +1,7 @@
 
-const filtersReducerDefaultState = [{
-  sortBy: 'name'
-}];
+const filtersReducerDefaultState = {
+  sortBy: 'name_asc'
+};
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {

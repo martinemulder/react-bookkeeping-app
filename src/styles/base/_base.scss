@@ -151,31 +151,19 @@ i {
   color: $primary;
 }
 
-.content-wrap {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  padding: 0 5%;
-}
-
-.page-wrap {
-  display: flex;
-  padding: 0 0 0 5%;
-  position: relative;
-}
-
-.content {
-  width: calc(100vw - 60px);
-  padding: 0 2rem 6rem 0;
-  position: relative;
-}
-
 .page-nav {
   margin-top: 2rem;
 }
 
 a {
  color: $primary
+}
+
+.sideways {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+  margin-top: 30px;
+  color: grey;
 }
 
 // Forms

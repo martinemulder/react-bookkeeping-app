@@ -251,6 +251,7 @@ export class HoursForm extends React.Component {
                   value={description}
                   placeholder="Description"
                   onChange={this.onDescriptionChange}
+                  rows="3"
                 />
               </div>
             </div>

@@ -1,5 +1,5 @@
 
-export const selectClients = (clients, { sortBy = '' }) => {
+export const selectClients = (clients, { sortBy }) => {
   return clients.sort((a,b) => {
     if (sortBy === 'name_asc') {
       return b.name < a.name ? 1 : -1;
@@ -20,7 +20,9 @@ export const selectActiveClients = (clients) => {
       clientList.push(client)
     }
   });
-  return clientList;
+  return clientList.sort((a,b) => {
+    return b.name < a.name ? 1 : -1;
+  });
 };
 
 export const selectClientById = (id, clients) => {

@@ -62,9 +62,6 @@ export class HourEntryList extends React.Component {
           <TableHeaderCell name="project">
             project
           </TableHeaderCell>
-          <TableHeaderCell name="note">
-            note
-          </TableHeaderCell>
           <TableHeaderCell name="time">
             start
           </TableHeaderCell>

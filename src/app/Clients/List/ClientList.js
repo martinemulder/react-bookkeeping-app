@@ -56,11 +56,11 @@ export class ClientList extends React.Component {
 
 }
 
-const mapStateToProps = ((state) => {
+const mapStateToProps = (state) => {
   return {
     clients: selectClients(state.clients, state.clientFilters),
     clientFilters: state.clientFilters
   }
-});
+};
 
 export default withRouter(connect(mapStateToProps)(ClientList));

@@ -43,15 +43,16 @@ export class Sidebar extends React.Component {
     const { totalHours, totalHoursDecimal } = this.props;
     const { total, hourly, open } = this.state;
     return (
-      <div>
+      <div id="sidebar-wrap" className={ open ? 'open' : '' }>
         <button
           id="open-sidebar"
           onClick={this.OnToggleSidebar}
+          className={ open ? 'hidden' : '' }
         >
           <i className="fas fa-bars"></i>
+          <div className="sideways">Summary</div>
         </button>
-        <div id="sidebar"
-             className={ open ? '' : 'hidden' }>
+        <div id="sidebar" className={ open ? '' : 'hidden' }>
           <button
             id="close-sidebar"
             onClick={this.OnToggleSidebar}

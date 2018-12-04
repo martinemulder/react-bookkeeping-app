@@ -1,14 +1,23 @@
-#sidebar {
-  position: absolute;
+#sidebar-wrap {
+  position: fixed;
   right: 0;
+  top: 55px;
+}
+
+#sidebar-wrap.open {
   width: 20vw;
+}
+
+#sidebar {
   padding: 2rem;
   font-size: 1.1rem;
   line-height: 1.7rem;
   z-index: 2;
-  top: 0;
   border: 0.2rem solid rgba(0, 0, 0, 0.015);
   border-width: 0 0.2rem 0 0.2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 #open-sidebar, #sidebar {
