@@ -26,7 +26,9 @@ export const selectProjectsFromClient = (projects, { selectedClient = ''}) => {
     }
   });
 
-  return clientProjects
+  return clientProjects.sort((a,b) => {
+    return b.title < a.title ? 1 : -1;
+  })
 };
 
 export const selectActiveProjects = (projects) => {
