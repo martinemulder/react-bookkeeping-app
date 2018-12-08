@@ -19,7 +19,7 @@ export class HoursForm extends React.Component {
       endTime: props.hourEntry ? props.hourEntry.endTime : '',
       totalTime: props.hourEntry ? props.hourEntry.totalTime : '',
       description: props.hourEntry ? props.hourEntry.description : '',
-      invoiced: props.hourEntry ? props.hourEntry.invoiced: '',
+      invoiced: props.hourEntry ? props.hourEntry.invoiced: 'no',
       submitting: false,
       focused: false,
       error: ''
@@ -101,6 +101,11 @@ export class HoursForm extends React.Component {
       } else {
         totalTime = '';
       }
+      //
+      // if (!this.state.invoiced || this.state.invoiced === "") {
+      //   console.log('set default');
+      //   this.setState(() => ({ invoiced : 'no' }));
+      // }
 
       this.props.onSubmit({
         project: this.state.project,

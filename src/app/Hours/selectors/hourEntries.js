@@ -41,7 +41,6 @@ const sortByTime = (hourEntries, sortBy) => {
 };
 
 export const selectTotalHours = (hourEntries, selectedHourEntries) => {
-
   if (selectedHourEntries.length > 0) {
     hourEntries = selectedHourEntries;
   }
@@ -68,7 +67,6 @@ export const timeToDecimal = (time) => {
 };
 
 const minutesToTime = (minutes) => {
-
   let hours = parseInt(minutes / 60);
   minutes = parseInt(minutes % 60);
 
@@ -81,6 +79,7 @@ const minutesToTime = (minutes) => {
 const timeToMinutes = (time) => {
   let minutes = parseInt(time.split(':')[0]) * 60;
   minutes = minutes + parseInt(time.split(':')[1]);
+
   return minutes;
 };
 
@@ -97,5 +96,4 @@ export const selectTotalTime = (startTime, endTime) => {
   let minutes = newEndTime.diff(newStartTime, 'minutes');
 
   return minutesToTime(minutes);
-
 };

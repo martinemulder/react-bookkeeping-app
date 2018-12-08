@@ -42,6 +42,7 @@ export class HourFilter extends React.Component {
   };
 
   onInvoicedChange = (e) => {
+    console.log(e.target.value);
     const invoiced = e.target.value;
     this.setState(() => ({ invoiced }));
   };

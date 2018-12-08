@@ -43,7 +43,7 @@ export const startAddHourEntry = (hourEntryData = {}) => {
       description = '',
       invoiced = ''
     } = hourEntryData;
-    const hourEntry = { project, client, date, startTime, endTime, totalTime, description, invoiced };
+    const hourEntry = { project, client, date, startTime, endTime, totalTime, description, invoiced};
 
     return database.ref(`users/${uid}/hourEntries`).push(hourEntry).then((ref) => {
       dispatch(addHourEntry({
