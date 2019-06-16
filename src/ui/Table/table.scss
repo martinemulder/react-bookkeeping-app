@@ -1,15 +1,13 @@
 .table {
+  @include border-radius();
   width: 100%;
   border: .2rem solid rgba(0,0,0,.075);
-  -webkit-border-radius: .2rem;
-  -moz-border-radius: .2rem;
-  border-radius: .2rem;
   display: table;
 }
 
 .table-header-cell {
   display: table-cell;
-  color: rgba(0,0,0,.75);
+  color: rgba(0, 0, 0, .75);
   padding: .5rem;
   border-bottom: .1rem dashed rgba(0,0,0,.075);
 }

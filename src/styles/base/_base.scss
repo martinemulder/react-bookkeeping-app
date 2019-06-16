@@ -1,4 +1,3 @@
-// Colors
 
 // CSS reset
 
@@ -157,6 +156,26 @@ i {
 
 a {
  color: $primary
+}
+
+.tooltip span {
+  @include border-radius();
+  position: absolute;
+  background: $light;
+  display: none;
+  color: rgba(0, 0, 0, .75);
+  padding: .5rem;
+  font-size: .9em;
+}
+
+.inner-table-cell {
+  .tooltip {
+    float: right;
+  }
+}
+
+.tooltip:hover span {
+  display: inline-block;
 }
 
 .sideways {

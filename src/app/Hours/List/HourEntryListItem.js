@@ -27,6 +27,14 @@ const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHour
       name="project"
     >
       {project.title}
+      {hourEntry.description ?
+        <a className="tooltip">
+          <i className="fas fa-comment"></i>
+          <span>
+          {hourEntry.description}
+          </span>
+        </a> : ''
+      }
     </TableCell>
     <TableCell
       name="time"
