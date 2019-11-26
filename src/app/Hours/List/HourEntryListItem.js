@@ -21,12 +21,12 @@ const HourEntryListItem = ({ hourEntry, project, client, onHourEntryEdit, onHour
     <TableCell
       name="client"
     >
-      {client.name}
+      {client ? client.name : ''}
     </TableCell>
     <TableCell
       name="project"
     >
-      {project.title}
+      {project ? project.title : ''}
       {hourEntry.description ?
         <a className="tooltip">
           <i className="fas fa-comment"></i>

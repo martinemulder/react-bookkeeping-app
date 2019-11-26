@@ -28,15 +28,15 @@ export class ClientEdit extends React.Component {
           onSubmit={this.onSubmit}
           client={client}
         />
-        <Button
-          text="Remove this client"
-          name="remove"
-          color="remove"
-          action={() => {
-            dispatch(startRemoveClient({id: client.id}));
-            history.push(toClientDashboard());
-          }}
-        />
+        {/*<Button*/}
+          {/*text="Remove this client"*/}
+          {/*name="remove"*/}
+          {/*color="remove"*/}
+          {/*action={() => {*/}
+            {/*dispatch(startRemoveClient({id: client.id}));*/}
+            {/*history.push(toClientDashboard());*/}
+          {/*}}*/}
+        {/*/>*/}
       </AppFrame>
     )
   }
