@@ -11,11 +11,11 @@ import { HourEntryDashboard } from '../app/Hours';
 import HoursCreate from '../app/Hours/Create/HourEntryCreate';
 import HoursEdit from '../app/Hours/Edit/HourEntryEdit';
 import Login from '../app/Login/Login';
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-export const history = createHistory();
+export const history = createBrowserHistory();
 
 const AppRouter = () => (
   <Router history={history}>
