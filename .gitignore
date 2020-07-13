@@ -5,3 +5,4 @@ public/dist/
 *.map
 .env*
 .DS_Store
+*.code-workspace
